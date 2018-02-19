@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Upment_FlushMaxCDN>
+            <version>0.1.0</version>
+        </Upment_FlushMaxCDN>
+    </modules>
+    <global>
+        <helpers>
+            <flushcdn>
+                <class>Upment_FlushMaxCDN_Helper</class>
+            </flushcdn>
+        </helpers>
+        <models>
+            <flushcdn>
+                <class>Upment_FlushMaxCDN_Model</class>
+            </flushcdn>
+        </models>
+        <cache>
+            <types>
+                <cdn_cache translate="label,description" module="flushcdn">
+                    <label>maxCDN Cache</label>
+                    <description>Flush maxCDN cache</description>
+                    <tags>MAX_CDN_CACHE</tags>
+                </cdn_cache>
+            </types>
+        </cache>
+        <events>
+            <adminhtml_cache_flush_all>
+                <observers>
+                    <adminhtml_cdn_cache_flush_all_handler>
+                        <type>singleton</type>
+                        <class>flushcdn/observer</class>
+                        <method>clearCDNCache</method>
+                    </adminhtml_cdn_cache_flush_all_handler>
+                </observers>
+            </adminhtml_cache_flush_all>
+            <adminhtml_cache_refresh_type>
+                <observers>
+                    <adminhtml_cdn_cache_refresh_type_handler>
+                        <type>singleton</type>
+                        <class>flushcdn/observer</class>
+                        <method>clearCDNCacheType</method>
+                    </adminhtml_cdn_cache_refresh_type_handler>
+                </observers>
+            </adminhtml_cache_refresh_type>
+            <adminhtml_cache_flush_system>
+                <observers>
+                    <adminhtml_cdn_cache_flush_system_handler>
+                        <type>singleton</type>
+                        <class>flushcdn/observer</class>
+                        <method>clearCDNCache</method>
+                    </adminhtml_cdn_cache_flush_system_handler>
+                </observers>
+            </adminhtml_cache_flush_system>
+        </events>
+    </global>
+</config>
